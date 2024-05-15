@@ -1,0 +1,31 @@
+<h2>Search Musclegroups</h2>
+<form action="/musclegroups" method="GET">
+    <div>
+        <label>Title</label>
+        <input type="text" name="title" value="<%= searchOptions.title %>">
+    </div>
+
+    <div>
+        <label>Difficulty Level</label>
+        <select name="difficultyLevel">
+            <option value="" <% if (!searchOptions.difficultyLevel) { %>selected <% } %>>Any</option>
+
+            <option value="Beginner" <% if (searchOptions.difficultyLevel === 
+            'Beginner') { %>selected <% } %>>Beginner</option>
+
+            <option value="Intermediate" <% if (searchOptions.difficultyLevel === 
+            'Intermediate') { %>selected <% } %>>Intermediate</option>
+            
+            <option value="Advanced" <% if (searchOptions.difficultyLevel === 
+            'Advanced') { %>selected <% } %>>Advanced</option>
+        </select>
+    </div>
+
+    <button type="submit">Search</button>
+</form>
+<br/>
+<div>
+    <% musclegroups.forEach(musclegroup => { %>
+        <img height="150" width="100" src="<%= musclegroup.coverImagepath %>">
+    <% }) %>
+</div>

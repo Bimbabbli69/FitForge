@@ -1,0 +1,41 @@
+<div>
+    <label>Title</label>
+    <input type="text" name="title" value="<%= musclegroup.title %>">
+</div>
+
+<div>
+    <label>Exercise</label>
+    <select name="exercise">
+        <% exercises.forEach(exercise => { %>
+            <% if (exercise.id === musclegroup.exercise) { %>
+                <option selected label="<%= exercise.name %>" value="<%= exercise.id %>"></option>
+            <% } else { %>
+                <option label="<%= exercise.name %>" value="<%= exercise.id %>"></option>
+            <% } %>
+        <% }) %>
+    </select>
+</div>
+
+<div>
+    <label>Difficulty Level</label>
+    <select name="difficultyLevel">
+      <option value="Beginner" <%= musclegroup.difficlutyLevel === 'Beginner' ? 'selected' : '' %>>Beginner</option>
+      <option value="Intermediate" <%= musclegroup.difficlutyLevel === 'Intermediate' ? 'selected' : '' %>>Intermediate</option>
+      <option value="Advanced" <%= musclegroup.difficlutyLevel === 'Advanced' ? 'selected' : '' %>>Advanced</option>
+    </select>
+</div>
+
+<div>
+    <label>Duration (min)</label>
+    <input type="number" name="duration" min="1" value="<% musclegroup.Duration %>"> 
+</div>
+
+<div>
+    <label>Cover</label>
+    <input type="file" name="cover"> 
+</div>
+
+<div>
+    <label>Description</label>
+    <textarea name="description" id=""><%= musclegroup.description %></textarea>
+</div>
