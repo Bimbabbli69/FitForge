@@ -1,21 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const multer = require('multer')
-const path = require('path')
-const fs = require('fs')
 const Musclegroup = require('../models/musclegroup')
 const Exercise = require('../models/exercise')
-
-const uploadPath = path.join('public', 'uploads', 'musclegroupCovers')
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
-
-const upload = multer({
-    dest: uploadPath,
-    fileFilter: (req, file, callback) => {
-        callback(null, imageMimeTypes.includes(file.mimetype))
-    }
-})
-
 // All Musclegroups Controller
 router.get('/', async (req, res) => {
     let query = Musclegroup.find()
@@ -34,7 +21,6 @@ router.get('/', async (req, res) => {
     } catch {
         res.redirect('/')
     }
-    
 })
 
 // New musclegroup Controller
@@ -43,33 +29,25 @@ router.get('/new', async (req, res) => {
 })
 
 // Create musclegroup Controller
-router.post('/', upload.single('cover'), async (req, res) => {
-    const fileName = req.file ? req.file.filename : null
+router.post('/', async (req, res) => {
     const musclegroup = new Musclegroup({
         title: req.body.title,
         exercise: req.body.exercise,
         difficultyLevel: req.body.difficultyLevel,
         duration: req.body.duration,
-        coverImageName: fileName,
         description: req.body.description
     })
 
+    saveCover(musclegroup, req.body.cover)
+
     try {
         const newMusclegroup = await musclegroup.save()
+        // res.redirect(`musclegroups/${newMusclegroup.id}`)
         res.redirect(`/musclegroups`)
     } catch {
-        if (musclegroup.coverImageName != null){
-            removeMusclegroupCover(musclegroup.coverImageName)
-        }
         renderNewPage(res, musclegroup, true)
     }
 })
-
-function removeMusclegroupCover(fileName) {
-    fs.unlink(path.join(uploadPath, fileName), err => {
-        if (err) console.error(err)
-    })
-}
 
 async function renderNewPage(res, musclegroup, hasError = false) {
     try {
@@ -82,6 +60,15 @@ async function renderNewPage(res, musclegroup, hasError = false) {
         res.render('musclegroups/new', params)
     } catch {
         res.redirect('/musclegroups')
+    }
+}
+
+function saveCover(musclegroup, coverEncoded){
+    if (coverEncoded == null) return
+    const cover = JSON.parse(coverEncoded)
+    if (cover != null && imageMimeTypes.includes(cover.type)) {
+        musclegroup.coverImage = new Buffer.from(cover.data, 'base64')
+        musclegroup.coverImageType = cover.type
     }
 }
 
