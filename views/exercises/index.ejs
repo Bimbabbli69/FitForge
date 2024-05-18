@@ -7,4 +7,7 @@
 <br/>
 <% exercises.forEach(exercise => { %>
     <div><%= exercise.name %></div>
+    <a href="/exercises/<%= exercise.id %>">View</a>
+    <a href="/exercises/<%= exercise.id %>/edit">Edit</a>
+    <%- include('../partials/deleteForm', {url: `/exercises/${exercise.id}`}) %>
 <% }) %>

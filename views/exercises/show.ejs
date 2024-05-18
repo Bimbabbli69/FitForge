@@ -1,0 +1,9 @@
+<h2><%= exercise.name %></h2>
+<a href="/exercises/<%= exercise.id %>/edit">Edit</a>
+<%- include('../partials/deleteForm', {url: `/exercises/${exercise.id}`}) %>
+<% if(musclegroupsByExercise.length > 0) { %>
+    <h2>Muclegroups By Exercise</h2>
+    <% musclegroupsByExercise.forEach(musclegroup => { %>
+        <img height="150" width="100" src="<%= musclegroup.coverImagepath %>">
+    <% }) %>
+<% } %>

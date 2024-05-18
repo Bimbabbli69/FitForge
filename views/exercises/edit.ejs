@@ -1,0 +1,6 @@
+<h2>Edit Exercise</h2>
+<form action="/exercises/<%= exercise.id %>?_method=PUT" method="POST">
+    <%- include('_form_fields') %>
+    <a href="/exercises/<%= exercise.id %>">Cancel</a>
+    <button type="submit">Update</button>
+</form>
