@@ -1,0 +1,22 @@
+<h2><%= musclegroup.title %></h2>
+<img widt="100" height="150" src="<%= musclegroup.coverImagepath %>">
+<div>
+    Exercise: <%= musclegroup.exercise.name %>
+</div>
+<div>
+    Difficulty Level: <%= musclegroup.difficultyLevel %>
+</div>
+<div>
+    Duration (Min): <%= musclegroup.duration %>
+</div>
+<div>
+    Description: <%= musclegroup.description %>
+</div>
+
+<a href="/musclegroups/<%= musclegroup.id %>/edit">Edit</a>
+<%- include('../partials/deleteForm', {url: `/musclegroups/${musclegroup.id}` }) %>
+<a href="/exercises/<%= musclegroup.exercise.id %>">View Exercise</a>
+
+
+
+

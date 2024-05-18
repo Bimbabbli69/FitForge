@@ -1,6 +1,9 @@
 <h2>Recently Added</h2>
 <div>
     <% musclegroups.forEach(musclegroup => { %>
-        <img height="150" width="100" src="<%= musclegroup.coverImagepath %>">
+        <a href="/musclegroups/<%= musclegroup.id %>"> 
+            <img height="150" width="100" src="<%= musclegroup.coverImagepath %>">
+        </a>
     <% }) %>
 </div>
+

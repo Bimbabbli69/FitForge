@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Musclegroup = require('../models/musclegroup')
 const Exercise = require('../models/exercise')
+const musclegroup = require('../models/musclegroup')
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
 // All Musclegroups Controller
 router.get('/', async (req, res) => {
@@ -42,22 +43,97 @@ router.post('/', async (req, res) => {
 
     try {
         const newMusclegroup = await musclegroup.save()
-        // res.redirect(`musclegroups/${newMusclegroup.id}`)
-        res.redirect(`/musclegroups`)
+        res.redirect(`musclegroups/${newMusclegroup.id}`)
     } catch {
         renderNewPage(res, musclegroup, true)
     }
 })
 
+//Show Musclegroup Controller
+router.get('/:id', async (req, res) => {
+    try {
+        const musclegroup = await Musclegroup.findById(req.params.id).populate('exercise').exec()
+        res.render('musclegroups/show', { musclegroup: musclegroup})
+    } catch {
+        res.redirect('/')
+    }
+})
+
+// Edit Musclegroup Controller
+router.get('/:id/edit', async (req, res) => {
+    try {
+        const musclegroup = await Musclegroup.findById(req.params.id)
+        renderEditPage(res, musclegroup)
+    } catch {
+        res.redirect('/')
+    }
+})
+
+// Update musclegroup Controller
+router.put('/:id', async (req, res) => {
+    let musclegroup
+    try {
+        musclegroup = await Musclegroup.findById(req.params.id)
+        musclegroup.title = req.body.title
+        musclegroup.exercise = req.body.exercise
+        musclegroup.difficultyLevel = req.body.difficultyLevel
+        musclegroup.duration = req.body.duration
+        musclegroup.description = req.body.description
+        if (req.body.cover != null && req.body.cover!== '') {
+            saveCover(musclegroup, req.body.cover)
+        }
+        await musclegroup.save()
+        res.redirect(`/musclegroups/${musclegroup.id}`)
+    } catch {
+        if (musclegroup != null) {
+            renderEditPage(res, musclegroup, true)
+        } else {
+            redirect('/')
+        }
+    }
+})
+
+//Delete Musclegroup Page
+router.delete('/:id', async (req, res) => {
+    let musclegroup
+    try {
+        musclegroup = await Musclegroup.findById(req.params.id)
+        await musclegroup.deleteOne()
+        res.redirect('/musclegroups')
+    } catch {
+        if (musclegroup != null) {
+            res.render('musclegroups/show', {
+                musclegroup: musclegroup, errorMessage: 'Could not delete musclegroup' 
+            })
+        } else {
+            res.redirect('/')
+        }
+    }
+})
+
 async function renderNewPage(res, musclegroup, hasError = false) {
+   renderFormPage(res, musclegroup, 'new', hasError)
+}
+
+async function renderEditPage(res, musclegroup, hasError = false) {
+    renderFormPage(res, musclegroup, 'edit', hasError)
+}
+
+async function renderFormPage(res, musclegroup, form, hasError = false) {
     try {
         const exercises = await Exercise.find({})
         const params = {
             exercises: exercises,
             musclegroup: musclegroup
         }
-        if (hasError) params.errorMessage = 'Error Creating Musclegroup'
-        res.render('musclegroups/new', params)
+        if (hasError) {
+            if (form === 'edit') {
+                params.errorMessage = 'Error Updating Musclegroup'
+            } else {
+                params.errorMessage = 'Error Creating Musclegroup'
+            }
+        }
+        res.render(`musclegroups/${form}`, params)
     } catch {
         res.redirect('/musclegroups')
     }

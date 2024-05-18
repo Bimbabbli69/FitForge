@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+
 const musclegroupSchema = new mongoose.Schema({
     title: {
         type: String,
