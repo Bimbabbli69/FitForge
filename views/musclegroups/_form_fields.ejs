@@ -1,11 +1,11 @@
-<div>
-    <label>Title</label>
-    <input type="text" name="title" value="<%= musclegroup.title %>">
-</div>
-
-<div>
-    <label>Exercise</label>
-    <select name="exercise">
+<div class="form-row">
+    <div class="form-item">
+        <label>Title</label>
+        <input type="text" name="title" value="<%= musclegroup.title %>">
+    </div>
+    <div class="form-item">
+        <label>Exercise</label>
+        <select name="exercise">
         <% exercises.forEach(exercise => { %>
             <% if (exercise.id === musclegroup.exercise) { %>
                 <option selected label="<%= exercise.name %>" value="<%= exercise.id %>"></option>
@@ -13,29 +13,37 @@
                 <option label="<%= exercise.name %>" value="<%= exercise.id %>"></option>
             <% } %>
         <% }) %>
-    </select>
+        </select>
+    </div>
+
 </div>
 
-<div>
-    <label>Difficulty Level</label>
-    <select name="difficultyLevel">
-      <option value="Beginner" <%= musclegroup.difficlutyLevel === 'Beginner' ? 'selected' : '' %>>Beginner</option>
-      <option value="Intermediate" <%= musclegroup.difficlutyLevel === 'Intermediate' ? 'selected' : '' %>>Intermediate</option>
-      <option value="Advanced" <%= musclegroup.difficlutyLevel === 'Advanced' ? 'selected' : '' %>>Advanced</option>
-    </select>
+<div class="form-row">
+    <div class="form-item">
+        <label>Difficulty Level</label>
+        <select name="difficultyLevel">
+        <option value="Beginner" <%= musclegroup.difficlutyLevel === 'Beginner' ? 'selected' : '' %>>Beginner</option>
+        <option value="Intermediate" <%= musclegroup.difficlutyLevel === 'Intermediate' ? 'selected' : '' %>>Intermediate</option>
+        <option value="Advanced" <%= musclegroup.difficlutyLevel === 'Advanced' ? 'selected' : '' %>>Advanced</option>
+        </select>
+    </div>
+
+    <div class="form-item">
+        <label>Duration (min)</label>
+        <input type="number" name="duration" min="1" value="<% musclegroup.Duration %>"> 
+    </div>
+
 </div>
 
-<div>
-    <label>Duration (min)</label>
-    <input type="number" name="duration" min="1" value="<% musclegroup.Duration %>"> 
-</div>
+<div class="form-row">
+    <div class="form-item form-item-no-grow">
+        <label>Cover</label>
+        <input type="file" name="cover" class="filepond">
+    </div>
 
-<div>
-    <label>Cover</label>
-    <input type="file" name="cover" class="filepond">
-</div>
+    <div class="form-item">
+        <label>Description</label>
+        <textarea name="description" id=""><%= musclegroup.description %></textarea>
+    </div>
 
-<div>
-    <label>Description</label>
-    <textarea name="description" id=""><%= musclegroup.description %></textarea>
 </div>

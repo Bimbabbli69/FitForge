@@ -1,8 +1,10 @@
 <h2 class="page-header"><%= exercise.name %></h2>
-<a href="/exercises/<%= exercise.id %>/edit">Edit</a>
-<%- include('../partials/deleteForm', {url: `/exercises/${exercise.id}`}) %>
+<div class="btn-row">
+    <a class="btn btn-primary" href="/exercises/<%= exercise.id %>/edit">Edit</a>
+    <%- include('../partials/deleteForm', {url: `/exercises/${exercise.id}`}) %>
+</div>
 <% if(musclegroupsByExercise.length > 0) { %>
-    <h2>Muclegroups By Exercise</h2>
+    <h2 class="page-header">Muclegroups By Exercise</h2>
     <% musclegroupsByExercise.forEach(musclegroup => { %>
         <a href="/musclegroups/<%= musclegroup.id %>"> 
             <img height="150" width="100" src="<%= musclegroup.coverImagepath %>">

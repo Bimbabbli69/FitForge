@@ -26,8 +26,12 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
-app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }));
+app.use(express.static('public'));
+
+// Öka gränsen för JSON och URL-encoded payloads
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
 app.use(flash());
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -37,7 +41,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
-app.use(express.static('public'));
 
 mongoose.connect(process.env.DATABASE_URL)
     .then(() => console.log('Connected to Mongoose'))
@@ -82,7 +85,6 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
         res.render('register.ejs', { error: 'Failed to register user. Please try again.' });
     }
 });
-
 
 app.delete('/logout', (req, res) => {
     req.logout((err) => {
