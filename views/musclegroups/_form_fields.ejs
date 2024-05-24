@@ -7,9 +7,11 @@
         <label>Exercise</label>
         <select name="exercise">
         <% exercises.forEach(exercise => { %>
+            <!-- Om övningen är vald, sätt option till vald -->
             <% if (exercise.id === musclegroup.exercise) { %>
                 <option selected label="<%= exercise.name %>" value="<%= exercise.id %>"></option>
             <% } else { %>
+                <!-- Annars, lämna option som normalt -->
                 <option label="<%= exercise.name %>" value="<%= exercise.id %>"></option>
             <% } %>
         <% }) %>

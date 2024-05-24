@@ -3,16 +3,16 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true //stoppar sparning av felaktig data
   },
   email: {
     type: String,
-    required: true,
+    required: true, //stoppar sparning av felaktig data
     unique: true
   },
   password: {
     type: String,
-    required: true
+    required: true //stoppar sparning av felaktig data
   }
 });
 

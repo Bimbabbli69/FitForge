@@ -28,7 +28,7 @@ app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 app.use(express.static('public'));
 
-// Öka gränsen för JSON och URL-encoded payloads
+// Öka gränsen för JSON och URL-encoded payloads för det uppstodd error med att gränsen var nådd
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
@@ -42,6 +42,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
 
+// Anslut till databasen
 mongoose.connect(process.env.DATABASE_URL)
     .then(() => console.log('Connected to Mongoose'))
     .catch(error => console.error('Error connecting to Mongoose:', error));
@@ -55,7 +56,7 @@ app.use('/', indexRouter);
 app.use('/exercises', checkAuthenticated, exerciseRouter);
 app.use('/musclegroups', checkAuthenticated, muscleGroupRouter);
 
-// Authentication routes and logic
+// Authentication routes och logiken bakom den
 app.get('/login', checkNotAuthenticated, (req, res) => {
     res.render('login.ejs');
 });
@@ -72,7 +73,7 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 
 app.post('/register', checkNotAuthenticated, async (req, res) => {
     try {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const hashedPassword = await bcrypt.hash(req.body.password, 10); // Hashar lösenordet med bcrypt 2^10 gånger vilket ses som en standrard för säkerhet
         const user = new User({
             name: req.body.name,
             email: req.body.email,
@@ -111,6 +112,7 @@ function checkNotAuthenticated(req, res, next) {
     next();
 }
 
+// Starta servern lokalt på port 3000
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Server is running on port ${process.env.PORT || 3000}`);
 });

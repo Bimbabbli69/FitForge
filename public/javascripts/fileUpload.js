@@ -1,5 +1,7 @@
 const rootStyles = window.getComputedStyle(document.documentElement)
 
+// Kontrollerar om variablarna är definerade och kallar på funktionen ready om de är de och om inte
+// Vänta på att main css har laddats in
 if (rootStyles.getPropertyValue('--musclegroup-cover-width-large') 
   && rootStyles.getPropertyValue('--musclegroup-cover-width-large') != '' ) {
   ready()

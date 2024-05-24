@@ -4,7 +4,7 @@ const Musclegroup = require('./musclegroup')
 const exerciseSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true //Stoppar från att spara tomma exercises
     }
 })
 

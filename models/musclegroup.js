@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const musclegroupSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: true //stoppar sparning av felaktig data
     }, 
     description: {
         type: String,
@@ -11,28 +11,28 @@ const musclegroupSchema = new mongoose.Schema({
     difficultyLevel: {
         type: String,
         enum: ['Beginner', 'Intermediate', 'Advanced'],
-        required: true
+        required: true //stoppar sparning av felaktig data
     },
     duration: {
         type: Number,
-        required: true
+        required: true //stoppar sparning av felaktig data
     },
     createdAt: {
         type: Date,
-        required: true,
+        required: true, //stoppar sparning av felaktig data
         default: Date.now
     },
     coverImage: {
         type: Buffer,
-        required: true
+        required: true //stoppar sparning av felaktig data
     },
     coverImageType: {
         type: String,
-        required: true
+        required: true //stoppar sparning av felaktig data
     },
     exercise: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        required: true, //stoppar sparning av felaktig data
         ref: 'Exercise'
     }
 });

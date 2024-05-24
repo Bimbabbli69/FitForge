@@ -1,4 +1,5 @@
 <h2 class="page-header">Search Exercises</h2>
+<!-- Formulär för att söka efter övningar -->
 <form action="/exercises" method="GET">
     <div class="form-row">
         <div class="form-item">
@@ -7,12 +8,16 @@
         </div>
     </div>
     <div class="form-row form-row-end">
+        <!-- Knapp för att skicka in sökningen -->
         <button class="btn btn-primary" type="submit">Search</button>
     </div>
 </form>
 <br/>
+
+<!-- Loop för att visa resultat av sökningen -->
 <% exercises.forEach(exercise => { %>
     <div class="exercise-row">
+        <!-- Visa namnet på varje övning -->
         <div class="exercise-name"><%= exercise.name %></div>
         <div class="btn-row">
             <a class="btn btn-primary" href="/exercises/<%= exercise.id %>">View</a>
