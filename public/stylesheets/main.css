@@ -1,4 +1,5 @@
-@import "shared/buttons.css";
+@import "shared/musclegroups.css";
+
 
 :root {
   font-family: "Monserrat", sans-serif;
@@ -117,6 +118,8 @@ body {
     margin-left: 0;
 }
 
+/*Forms*/
+
 .form-row {
     display: flex;
     margin-bottom: .5rem;
@@ -173,6 +176,8 @@ body {
     border-color: hsl(200, 100%, 80%);
 }
 
+/*FilePond*/
+
 .filepond--root {
     font-family: "Monserrat", sans-serif;
     margin-bottom: 0;
@@ -187,3 +192,93 @@ body {
     color: hsl(200, 100%, 87%);
     font-size: inherit;
 }
+
+/*Exercise*/
+
+.exercise-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.exercise-name {
+    font-size: 1.5rem;
+}
+
+.musclegroup-cover {
+    width: 200px;
+    height: calc(200px / 0.75); /* width / aspect ratio */
+}
+
+.musclegroup-cover-large {
+    width: 325px;
+    height: calc(325px / 0.75); /* width-large / aspect ratio */
+}
+
+.musclegroup-grid {
+    display: grid;
+    justify-content: center;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(auto-fill, 200px);
+}
+
+.musclegroup-grid-large {
+    grid-template-columns: repeat(auto-fill, 325px);
+}
+
+.error-message {
+    color: hsl(20, 100%, 20%);
+}
+
+.musclegroup-details {
+    display: flex;
+}
+
+.musclegroup-details-label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    align-self: flex-start;
+}
+
+.musclegroup-details-grid {
+    display: grid;
+    align-content: flex-start;
+    align-items: center;
+    grid-gap: 1rem;
+    grid-template-columns: auto auto;
+}
+
+.musclegroup-details-btn-grid {
+    display: grid;
+    justify-items: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    grid-template-areas:
+      "edit delete"
+      "exercise exercise";
+    grid-gap: .5rem;
+    margin-top: .5rem;
+  }
+
+  .musclegroup-details-exercise-button {
+    grid-area: exercise;
+    justify-self: stretch;
+  }
+
+  .login {
+    justify-content: space-between;
+  }
+
+  .login-item {
+    margin: .5rem;
+    margin-left: 0;
+  }
+
+  .register {
+    justify-content: space-between;
+  }
+
+  .register-item {
+    margin: .5rem;
+    margin-left: 0;
+  }

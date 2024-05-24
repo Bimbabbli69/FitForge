@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/stylesheets/main.css" />
+  <link id="main-css" rel="stylesheet" href="/stylesheets/main.css" />
   <title>FitForge</title>
 </head>
 <body>
@@ -23,9 +23,6 @@
   <div class="inner-container">
     <%- include('../partials/errorMessage.ejs') %>
     <%- body %>
-    <form action="/logout?_method=DELETE" method="POST">
-      <button type="submit">Log Out</button>
-    </form>
   </div>
 </div>
 </body>

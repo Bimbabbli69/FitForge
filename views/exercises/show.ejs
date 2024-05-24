@@ -5,10 +5,6 @@
 </div>
 <% if(musclegroupsByExercise.length > 0) { %>
     <h2 class="page-header">Muclegroups By Exercise</h2>
-    <% musclegroupsByExercise.forEach(musclegroup => { %>
-        <a href="/musclegroups/<%= musclegroup.id %>"> 
-            <img height="150" width="100" src="<%= musclegroup.coverImagepath %>">
-        </a>
-    <% }) %>
+    <%- include('../partials/muscGrid', { musclegroups : musclegroupsByExercise}) %>
 <% } %>
 

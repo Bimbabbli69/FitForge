@@ -12,10 +12,12 @@
 </form>
 <br/>
 <% exercises.forEach(exercise => { %>
-    <div><%= exercise.name %></div>
-    <div class="btn-row">
-        <a class="btn btn-primary" href="/exercises/<%= exercise.id %>">View</a>
-        <a class="btn btn-primary" href="/exercises/<%= exercise.id %>/edit">Edit</a>
-        <%- include('../partials/deleteForm', {url: `/exercises/${exercise.id}`}) %>
+    <div class="exercise-row">
+        <div class="exercise-name"><%= exercise.name %></div>
+        <div class="btn-row">
+            <a class="btn btn-primary" href="/exercises/<%= exercise.id %>">View</a>
+            <a class="btn btn-primary" href="/exercises/<%= exercise.id %>/edit">Edit</a>
+            <%- include('../partials/deleteForm', {url: `/exercises/${exercise.id}`}) %>
+        </div>
     </div>
 <% }) %>

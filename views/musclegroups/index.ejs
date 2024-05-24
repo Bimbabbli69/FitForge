@@ -30,10 +30,4 @@
     </div>
 </form>
 <br/>
-<div>
-    <% musclegroups.forEach(musclegroup => { %>
-        <a href="/musclegroups/<%= musclegroup.id %>"> 
-            <img height="150" width="100" src="<%= musclegroup.coverImagepath %>">
-        </a>
-    <% }) %>
-</div>
+<%- include('../partials/muscGrid', { musclegroups : musclegroups, large: true}) %>

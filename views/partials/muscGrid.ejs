@@ -1,0 +1,11 @@
+<% musclegroupCoverClass = locals.large ? 'musclegroup-cover-large' : '' %>
+
+<% musclegroupGridClass = locals.large ? 'musclegroup-grid-large' : '' %>
+
+<div class="musclegroup-grid  <%= musclegroupGridClass %>">
+    <% musclegroups.forEach(musclegroup => { %>
+        <a href="/musclegroups/<%= musclegroup.id %>"> 
+            <img class="musclegroup-cover <%= musclegroupCoverClass %>" src="<%= musclegroup.coverImagepath %>">
+        </a>
+    <% }) %>
+</div>
